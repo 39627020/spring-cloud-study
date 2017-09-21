@@ -1,0 +1,33 @@
+discovery:
+  build: ./discovery
+  ports:
+    - "8761:8761"
+  expose:
+    - 8761
+user:
+  build: ./user
+  ports:
+    - "8000:8000"
+  expose:
+    - 8000
+  links:
+    - discovery
+movie:
+  build: ./movie
+  ports:
+    - "8010:8010"
+  expose:
+    - 8010
+  links:
+    - discovery
+    - user
+gateway:
+  build: ./gateway
+  ports:
+    - "8050:8050"
+  expose:
+    - 8050
+  links:
+    - discovery
+    - user
+    - movie
